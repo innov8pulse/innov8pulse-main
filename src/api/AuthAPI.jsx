@@ -25,13 +25,14 @@ import {
     }
   };
   
-  export const GoogleSignInAPI = () => {
+  export const GoogleSignInAPI = async () => {
     try {
-      let googleProvider = new GoogleAuthProvider();
-      let res = signInWithPopup(auth, googleProvider);
+      const googleProvider = new GoogleAuthProvider(); 
+      const res = await signInWithPopup(auth, googleProvider); // await for asynchronous handling
       return res;
     } catch (err) {
-      return err;
+      console.error("Sign-in error: ", err); // Better error handling
+      return null;
     }
   };
   

@@ -201,3 +201,20 @@ button:focus-visible {
     font-size: 18px;
   }
 }
+
+.error-label {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.password-toggle{
+  /* color: red; */
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.toggle {
+  padding: 5px;
+  display: inline;
+}
