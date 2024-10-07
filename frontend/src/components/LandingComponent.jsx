@@ -5,6 +5,7 @@ import viteLogo from '/vite.svg'
 import LogoWhite from "../assets/logo-white-bg.png"
 import "../index.css"
 import "../App.css"
+import Topbar from "../components/common/Topbar";
 
 export default function LandingComponent() {
     return (

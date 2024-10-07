@@ -1,6 +1,6 @@
-body {
+/* body {
     background-color: #17202a;
-}
+} */
 .title-container {
     background-color: rgb(241, 241, 243);
     padding-top: 3.75rem;
@@ -37,7 +37,7 @@ body {
     transition-duration: 0.3s;
 }
 
-h1 {
+.home-title {
     /* --fontFamily: "Inter",Verdana,-apple-system,"system-ui",Arial,Helvetica,sans-serif; */
     text-align: center;
     margin: 0;
