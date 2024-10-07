@@ -1,24 +1,14 @@
 import React from "react";
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
-import Login from "../Pages/Login";
-import LogoWhite from "../assets/logo-white.png"
+// import Login from "../Pages/Login";
+import LogoWhite from "../assets/logo-white-bg.png"
+import "../index.css"
 import "../App.css"
 
 export default function LandingComponent() {
     return (
         <>
-        {/* <div className='logo-header'>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <img src="assets/logo-white.svg" alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
         <div className='Hero'>
           <div className='Left-Content'>
           <img src={LogoWhite} className="innovLogo" />
@@ -34,7 +24,6 @@ export default function LandingComponent() {
           </div>
           <div className='Right-Content'>
             <div className='Vid-Container'>
-              
             </div>
           </div>
         </div>

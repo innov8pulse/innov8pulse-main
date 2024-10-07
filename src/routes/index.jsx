@@ -5,9 +5,9 @@ import {
 import  Login  from "../Pages/Login";
 import  Landing   from "../Pages/Landing"
 import  Register  from "../Pages/Register";
-import  Home  from "../Pages/Home";
+import  HomeLayout  from "../layouts/HomeLayout";
 import AddProjects from "../Pages/AddProjects";
-
+import Projects from "../components/common/Projects";
 
 export const router = createBrowserRouter([
   {
@@ -24,10 +24,10 @@ export const router = createBrowserRouter([
     },
     {
       path: "/home",
-      element: <Home />,
-    },
+      element: <HomeLayout />,
+    }, 
     {
-      path: "/project",
+      path: "/addproject",
       element: <AddProjects />,
     },
   ]);

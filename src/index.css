@@ -72,7 +72,6 @@ button:focus-visible {
   }
 } */
 
-
 .login-wrapper {
   background-color: #ffffff !important;
     height: 100vh;
@@ -218,3 +217,15 @@ button:focus-visible {
   padding: 5px;
   display: inline;
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.custom-spinner .ant-spin-dot i {
+  background-color: #17202a; 
+}
+

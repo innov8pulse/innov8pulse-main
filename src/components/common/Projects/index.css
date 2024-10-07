@@ -1,0 +1,49 @@
+body {
+    background-color: #17202a;
+}
+.title-container {
+    background-color: rgb(241, 241, 243);
+    padding-top: 3.75rem;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem 1rem 3.75rem;
+    text-align: center;
+}
+
+.header-container h1 + input, .header-container h2 + input {
+    margin-top: 1.25rem;
+    width: 100%;
+    min-width: 15.625rem;
+    max-width: 18.75rem;
+}
+
+.input-container {
+    border: 0.125rem solid rgb(143, 145, 163);
+    border-radius: 999px;
+    /* background-image: url(data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path fill='hsl(0, 0%, 85%)' d='M20.667 18.667h-1.053l-0.373-0.36c1.6-1.867 2.427-4.413 1.973-7.12-0.627-3.707-3.72-6.667-7.453-7.12-5.64-0.693-10.387 4.053-9.693 9.693 0.453 3.733 3.413 6.827 7.12 7.453 2.707 0.453 5.253-0.373 7.12-1.973l0.36 0.373v1.053l5.667 5.667c0.547 0.547 1.44 0.547 1.987 0s0.547-1.44 0-1.987l-5.653-5.68zM12.667 18.667c-3.32 0-6-2.68-6-6s2.68-6 6-6 6 2.68 6 6-2.68 6-6 6z'></path></svg>); */
+    background-position: calc(100% - 0.9375rem) center;
+    background-repeat: no-repeat;
+    background-size: 1.875rem;
+    background-color: rgb(255, 255, 255);
+    height: 3.125rem;
+    padding: 0px 3.75rem 0px 1.25rem;
+    font-size: 1rem;
+    appearance: none;
+    transition-duration: 0.3s;
+}
+
+h1 {
+    /* --fontFamily: "Inter",Verdana,-apple-system,"system-ui",Arial,Helvetica,sans-serif; */
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #17202a;
+    font-size: 4.75rem;
+    /* background: linear-gradient(rgb(136, 108, 241) 55.41%, rgb(67, 41, 166) 100%) text; */
+}
