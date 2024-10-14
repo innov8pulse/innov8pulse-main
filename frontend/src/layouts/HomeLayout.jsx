@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Home from "../Pages/Home";
+import { getCurrentUser } from "../api/FirestoreAPI";
 import  Topbar  from "../components/common/Topbar";
-export default function Landing() {
+
+export default function HomeLayout() {
+    useMemo(() => {
+        getCurrentUser();
+    }, []);
     return (
         <div>
             <Topbar />

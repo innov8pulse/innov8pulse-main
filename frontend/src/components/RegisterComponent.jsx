@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { RegisterAPI } from "../api/AuthAPI";
-// import { postUserData } from "../api/FirestoreAPI";
+import { postUserData } from "../api/FirestoreAPI";
 import LogoBlack from "../assets/logo-black.png"
 import { useNavigate } from "react-router-dom";
-// import { getUniqueID } from "../helpers/getUniqueId";
+import { getUniqueID } from "../helpers/getUniqueId";
 import { toast } from "react-toastify";
 
 export default function RegisterComponent() {
@@ -58,7 +58,7 @@ export default function RegisterComponent() {
             className="common-input"
             placeholder="email or phone number"
           />
-          <div className="password-container"> {/* Container for password input and toggle */}
+          <div className="password-container"> 
             <input
               onChange={(event) =>
                 setCredentials({ ...credentails, password: event.target.value })
@@ -79,7 +79,7 @@ export default function RegisterComponent() {
         <button onClick={register} className="login-btn">
           agree & join
         </button>
-        <hr class="hr-text" data-content="or" />
+        <hr className="hr-text" data-content="or" />
         <div className="google-btn-container">
           <p className="go-to-signup">
             already on innov8pulse?{" "}

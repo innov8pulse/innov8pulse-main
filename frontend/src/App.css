@@ -43,13 +43,6 @@
   font-size: 12px;
   font-family: sans-serif;
   box-sizing: border-box;
-  -webkit-font-smoothing: inherit;
-  --border-bottom-width: 0px;
-  --border-color: #222222;
-  --border-left-width: 0px;
-  --border-right-width: 1px;
-  --border-style: solid;
-  --border-top-width: 0px;
   align-content: center;
   align-items: center;
   display: flex;
@@ -113,14 +106,6 @@ h1 {
   -webkit-text-stroke-color: initial;
   font-feature-settings: initial;
   text-wrap: initial;
-
-  --token-cfcd8ffe-c961-4d8b-8bab-c389d1c9933e: rgb(51, 51, 51); 
-  --token-3a62a850-1ff9-4c1c-abdd-eb97b43be158: hsl(0, 100%, 50%); 
-  --token-5e838d33-7c7f-4292-b9af-57e81dbab88c: rgb(0, 119, 255);
-  --token-0dd2e777-7312-4683-be1a-21ece6832b92: rgb(255, 199, 0); 
-  --token-d4b9acdd-f7f1-4ae4-8e5d-bb87d86230a2: rgb(0, 255, 26); 
-  --token-886c99f5-051b-4ddf-9c2e-46b5d7b8bc86: rgb(122, 122, 122); 
-  --token-a4e28e3d-8089-46ef-aeba-6d919442c7e7: rgba(255, 255, 255, .08); 
 }
 
 
@@ -136,28 +121,7 @@ h1 {
 }
 
 p{
-  --token-cfcd8ffe-c961-4d8b-8bab-c389d1c9933e: rgb(51, 51, 51);
-  --token-3a62a850-1ff9-4c1c-abdd-eb97b43be158: hsl(0, 100%, 50%);
-  --token-5e838d33-7c7f-4292-b9af-57e81dbab88c: rgb(0, 119, 255);
-  --token-0dd2e777-7312-4683-be1a-21ece6832b92: rgb(255, 199, 0);
-  --token-d4b9acdd-f7f1-4ae4-8e5d-bb87d86230a2: rgb(0, 255, 26);
-  --token-886c99f5-051b-4ddf-9c2e-46b5d7b8bc86: rgb(122, 122, 122);
-  --token-a4e28e3d-8089-46ef-aeba-6d919442c7e7: rgba(255, 255, 255, .08);
-  --framer-will-change-override: none;
-  --framer-aspect-ratio-supported: auto;
-  --border-bottom-width: 0px;
-  --border-color: #222222;
-  --border-left-width: 0px;
-  --border-right-width: 1px;
-  --border-style: solid;
-  --border-top-width: 0px;
-  --framer-link-text-color: #0099ff;
-  --framer-link-text-decoration: underline;
-  white-space: pre-wrap;
-  word-break: break-word;
-  word-wrap: break-word;
-  box-sizing: border-box;
-  -webkit-font-smoothing: inherit;
+  
   margin: 0px;
   padding: 20px;
   font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
@@ -193,67 +157,348 @@ p{
   padding: 5px 5px 5px 15px;
 }
 
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12px, 1fr)); /* Adjust columns to fill available space */
-  grid-gap: 3px; /* Gap between day cubes */
-  width: 100%; /* Occupy full width */
-  max-width: 100%;
-  padding: 10px;
+.Vid-Container {
+  width: 100%;
+  height: 100vh; 
 }
 
-.week-column {
-  display: grid;
-  grid-template-rows: repeat(7, 12px); /* Each column will have 7 rows (for the days of the week) */
-  gap: 3px; /* Space between day cubes */
+.Right-Content {
+  font-size: 12px;
+  align-content: right;
+  align-items: right;
+  display: flex;
+  flex: 1 0 0px;
+  gap: 10px;
+  justify-content: right;
+  padding: 0;
+  position: relative;
+  z-index: -1;
+  height: 1px;
+  order: 0;
+}
+.Vid-Container video {
+  position: fixed;
+  top: 50%;
+  left: 70%;
+  width: 100vw; 
+  height: 100vh; 
+  transform: translate(-50%, -50%);
+  z-index: -1; 
+  pointer-events: none; 
 }
 
-.day {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px; /* Rounded corners like GitHub */
-  transition: background-color 0.2s ease-in-out;
+
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
 }
 
-.level-0 {
-  background-color: #e0e0e0; /* Light grey */
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  filter: blur(8px); 
 }
 
-.level-1 {
-  background-color: #c0c0c0;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 1; 
 }
 
-.level-2 {
-  background-color: #a0a0a0;
+.dynamic-list {
+  position: fixed;
+  top: 50%; 
+  left: 60%; 
+  transform: translate(-50%, -50%); 
+  color: white; 
+  font-size: 2rem; 
+  text-align: center; 
+  z-index: 2; 
+  animation: fade-in 1s ease-in-out; 
 }
 
-.level-3 {
-  background-color: #808080;
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-.level-4 {
-  background-color: #505050;
+.Hero {
+  font-size: 12px;
+  font-family: sans-serif;
+  height: 100svh;
+  width: 100svw;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0px;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  aspect-ratio: auto;
 }
 
-.level-5 {
-  background-color: #000000; /* Darkest - black */
+.Left-Content {
+  font-size: 12px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  align-content: flex-start;
+  align-items: flex-start;
+  background-color: #17202a;
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: 100%;
+  justify-content: center;
+  max-width: 500px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 1px;
 }
 
-/* Ensures the grid has exactly 7 rows */
-@media (min-width: 480px) {
-  .calendar {
-      grid-template-columns: repeat(auto-fill, minmax(12px, 1fr));
-  }
+.Headers {
+  font-size: 12px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 24px;
+  height: 1px;
+  justify-content: flex-end;
+  max-width: 600px;
+  overflow: hidden;
+  padding: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.Hero-Heading {
+  font-size: 12px;
+  font-family: sans-serif;
+  flex: none;
+  height: auto;
+  max-width: 500px;
+  position: relative;
+  white-space: pre-wrap;
+  width: 100%;
+  word-break: break-word;
+  word-wrap: break-word;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  transform: none;
+}
+
+h1 {
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  -webkit-font-smoothing: inherit;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  color: rgb(255, 255, 255);
+  font-size: 64px;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+  text-decoration: none;
+  line-height: 1em;
+  text-align: left;
+  border-bottom-width: 0px;
+  border-color: #222222;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-style: solid;
+  border-top-width: 0px;
+  -webkit-text-stroke-width: initial;
+  -webkit-text-stroke-color: initial;
+  font-feature-settings: initial;
+  text-wrap: initial;
+}
+
+.Hero-Heading-2 {
+  flex: none;
+  height: auto;
+  max-width: 500px;
+  position: relative;
+  white-space: pre-wrap;
+  width: 100%;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+p {
+  margin: 0px;
+  padding: 20px;
+  font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+  font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
+  font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
+  color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
+  font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+  letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+  text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
+  text-decoration: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, none));
+  line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
+  text-align: var(--framer-blockquote-text-alignment, var(--framer-text-alignment, start));
+  -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
+  -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
+  font-feature-settings: var(--framer-font-open-type-features, initial);
+  text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap));
+  --framer-font-family: "Manrope", sans-serif;
+  --framer-font-size: 18px;
+  --framer-font-style: normal;
+  --framer-font-weight: 500;
+  --framer-letter-spacing: 0em;
+  --framer-line-height: 1.4em;
+  --framer-paragraph-spacing: 20px;
+  --framer-text-color: rgba(255, 255, 255, .6);
+  --framer-text-decoration: none;
+  --framer-text-transform: none;
+  --framer-text-alignment: left;
+}
+
+.innovLogo {
+  width: 60px;
+  height: 65px;
+  padding: 5px 5px 5px 15px;
 }
 
 .Vid-Container {
-  position: fixed; 
-  bottom: 0; /* Aligns it to the bottom of the screen */
-  right: -815px;
-  width: 100%; /* Make it stretch across the full width of the section/screen */
-  padding: 10px; /* Optional: Add some padding around the calendar */
-  background-color: white; /* Optional: You can choose a background color */
+  width: 100%;
+  height: 100vh;
+}
+
+.Right-Content {
+  font-size: 12px;
+  align-content: right;
+  align-items: right;
   display: flex;
-  justify-content: center; /* Center the calendar horizontally */
-  z-index: 1000; /* Ensures it stays above other content if necessary */
+  flex: 1 0 0px;
+  gap: 10px;
+  justify-content: right;
+  padding: 0;
+  position: relative;
+  z-index: -1;
+  height: 1px;
+  order: 0;
+}
+
+.Vid-Container video {
+  position: fixed;
+  top: 50%;
+  left: 70%;
+  width: 100vw; 
+  height: 100vh; 
+  transform: translate(-50%, -50%);
+  z-index: -1; 
+  pointer-events: none;
+}
+
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  filter: blur(8px); 
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 1; 
+}
+
+.dynamic-list {
+  position: fixed;
+  top: 50%; 
+  left: 60%; 
+  transform: translate(-50%, -50%); 
+  color: white; 
+  font-size: 2rem; 
+  text-align: center;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .Vid-Container {
+    display: none;
+  }
+
+  .Hero {
+    flex-direction: row; 
+  }
+
+  .Left-Content {
+    max-width: 100%; 
+  }
+
+  .Right-Content {
+    display: none;
+  }
+
+  .Vid-Container video {
+    width: 100vw; 
+    height: auto; 
+  }
+
+  .dynamic-list {
+    font-size: 1.5rem; 
+  }
+
+  h1 {
+    font-size: 40px; 
+  }
+
+  p {
+    font-size: 16px; 
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 30px; 
+  }
+
+  .dynamic-list {
+    font-size: 1rem; 
+  }
+
 }

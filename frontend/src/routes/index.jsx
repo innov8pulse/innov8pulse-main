@@ -8,6 +8,7 @@ import  Register  from "../Pages/Register";
 import  HomeLayout  from "../layouts/HomeLayout";
 import AddProjects from "../Pages/AddProjects";
 import Projects from "../components/common/Projects";
+import MyProjects from "../Pages/MyProjects";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
     {
       path: "/addproject",
       element: <AddProjects />,
+    },
+    {
+      path: "/projects",
+      element: <MyProjects />,
     },
   ]);
         
