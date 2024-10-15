@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HomeComponent from "../components/HomeComponent"; 
+import MainProjectsPage from "../components/common/Projects"; 
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
@@ -18,7 +18,7 @@ const Home = () => {
             };
         })
     }, []) 
-    return loading ? <Loader /> : <HomeComponent />;
+    return loading ? <Loader /> : <MainProjectsPage />;
 };
 
 export default Home; 

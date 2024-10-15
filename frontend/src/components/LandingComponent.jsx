@@ -33,10 +33,9 @@ export default function LandingComponent() {
 
     videoElement.addEventListener("ended", handleEnd);
 
-    // Change item every 3 seconds
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, 3000); // Change every 3 seconds
+    }, 3000);
 
     return () => {
       videoElement.removeEventListener("ended", handleEnd);
@@ -48,13 +47,12 @@ export default function LandingComponent() {
     const videoElement = videoRef.current;
 
     const handleEnd = () => {
-      videoElement.currentTime = 0; // Reset to start
-      videoElement.play(); // Play again
+      videoElement.currentTime = 0; 
+      videoElement.play(); 
     };
 
     videoElement.addEventListener("ended", handleEnd);
 
-    // Clean up event listener on component unmount
     return () => {
       videoElement.removeEventListener("ended", handleEnd);
     };
@@ -95,24 +93,6 @@ export default function LandingComponent() {
         </div>
         <div className="Right-Content">
           <div className="Vid-Container">
-            {/* <video 
-      src="https://www.youtube.com/embed/JpKOzW73KFI?si=Gy1d9Z0RkNGFBjWp" 
-      autoPlay 
-      loop 
-      muted 
-      playsInline
-      className="background-video"
-    >
-    </video> */}
-            {/* <iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/JpKOzW73KFI?autoplay=1&loop=1&mute=1&playlist=JpKOzW73KFI&controls=0&start=15"
-    frameBorder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerPolicy="strict-origin-when-cross-origin"
-    className="background-video"
-  ></iframe> */}
             <div className="video-container">
               <video
                 ref={videoRef}

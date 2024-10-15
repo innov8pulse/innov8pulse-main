@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .login-wrapper {
   background-color: #ffffff !important;
     height: 100vh;
@@ -158,3 +159,31 @@
   background-color: #17202a; 
 }
 
+/* Card Styles */
+.card {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card h2 {
+  font-size: 48px;
+  color: #007bff;
+}
+
+.project-list, .my-project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.project-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 200px;
+  background-color: #f9f9f9;
+}

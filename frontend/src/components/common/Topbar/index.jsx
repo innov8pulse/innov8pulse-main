@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoWhite from "../../../assets/logo-white-bg.png";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle  } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
+import { Modal, Button } from 'react-bootstrap';
+import { auth } from '../../../firebaseConfig';
 
 const Topbar = () => {
   let navigate = useNavigate();
+
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout Error:", error);
+    }
+  };
+
+  const CustomModal = ({ show, onClose, onConfirm }) => {
+    if (!show) return null;
+  
+    return (
+      <div className="custom-modal-overlay">
+        <div className="custom-modal">
+          <div className="custom-modal-body">
+            <p>Are you sure you want to log out?</p>
+          </div>
+          <div className="custom-modal-footer">
+            <button className="cancel-button" onClick={onClose}>Cancel</button>
+            <button className="confirm-button" onClick={onConfirm}>Logout</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="topbar-main">
       <div className="Logo">
@@ -25,7 +57,16 @@ const Topbar = () => {
       </div>
       <div className="react-icons">
         <FaBell size={30} className="react-icon"/>
-        <FaUserCircle  size={30} className="react-icon"/>
+        <FaUserCircle
+          size={30}
+          className="react-icon"
+          onClick={() => setShowLogoutModal(true)} 
+        />
+        <CustomModal
+        show={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        onConfirm={handleLogout}
+      />
       </div>
     </div>
   );
