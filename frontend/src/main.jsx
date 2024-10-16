@@ -11,12 +11,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import './index.css'
 import "./App.css"
 import { AuthProvider } from './auth/authprovider.jsx';
+import StarknetProvider from './provider/starknet-provider.tsx'; // Correct import for default export
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <StarknetProvider>
     <AuthProvider>
+    
     <RouterProvider router={router}/>
+   
     </ AuthProvider>
+    </StarknetProvider>
     <ToastContainer />
   </StrictMode>,
 )

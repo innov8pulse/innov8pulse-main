@@ -1,97 +1,119 @@
 .topbar-main {
-    width: 100%;
-    height: 70px;
-    /* background-color: rgba(255, 255, 255, 0.87); */
-    background-color: #17202a;
-    display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-    position:relative;
-    padding: 5px 50px 5px 10px;
-    justify-content: space-between;
-  }
-  
-.Logo{
-    position: relative;
-    display: flex;
-    align-items: left;
-    margin-left: 0;
-    justify-content: left;
+  width: 100%;
+  height: 70px;
+  background-color: #17202a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 5px 50px 5px 10px;
 }
-  .BarLogo {
-    width: 60px;
-    height: 65px;
-    padding: 5px 0px 5px 15px;
-    align-items: left;
-    margin-left: 0px;
-  }
 
-  .nav-items{
-    display: flex; 
-    align-items: center;
-    justify-content: space-between;
-  }
-  .nav-items ul {
-    display: flex; 
-    align-items: center;
-    /* justify-content: space-between; */
-    
-    list-style: none; 
-    margin-left: 0em; 
-    padding: 0px;
+.Logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  cursor: pointer;
+}
+
+.BarLogo {
+  width: 60px;
+  height: 65px;
+  padding: 5px;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-items ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-items li {
-    color: #ffffff;
-    margin: 0 5em; 
-    cursor: pointer; 
-    
-}
-
-.react-icons{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 8%;
-    color: #ffffff; 
-    /* right: 30px;
-    cursor: pointer;
-    margin-left: 30px; */
-}
-
-.react-icon:hover{
-    color: #5d6d7e;
-}
-
-/* .login-button {
-  font-family: "Inter",Verdana,-apple-system,"system-ui",Arial,Helvetica,sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  border-width: 0px;
-  border-style: solid;
-  border-color: var(--bg);
-  border-radius: 0.5rem;
-  background-color: var(--bg);
-  width: min-content;
-  display: flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-  padding: 0px 1.5rem;
-  white-space: nowrap;
-  text-decoration: none;
-  transition-duration: 0.3s;
+  color: #ffffff;
+  margin: 0 2.5em;
   cursor: pointer;
-  min-width: inherit;
-  height: 2.125rem;
-} */
-@media (max-width: 900px) {
-    .nav-items {
-        display: none; 
-    }
+  font-size: 18px;
+  font-weight: 500;
 }
 
+.react-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #ffffff;
+}
+
+.react-icon {
+  font-size: 28px; /* Increase icon size */
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.react-icon:hover {
+  color: #5d6d7e;
+}
+
+.wallet-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.connect-wallet-btn, .disconnect-wallet-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.connect-wallet-btn:hover, .disconnect-wallet-btn:hover {
+  background-color: #2980b9;
+}
+
+.connected-wallet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wallet-address {
+  background-color: #34495e;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap; /* Ensure the text doesn't wrap */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis if the address is too long */
+  max-width: 150px; /* Limit the width to fit in the topbar */
+}
+
+@media (max-width: 900px) {
+  .nav-items {
+    display: none;
+  }
+
+  .react-icons {
+    gap: 10px;
+  }
+
+  .wallet-address {
+    max-width: 100px; /* Reduce wallet address width on smaller screens */
+  }
+}
 
 .custom-modal-overlay {
   position: fixed;
