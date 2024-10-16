@@ -15,6 +15,7 @@
     "antd": "^5.21.2",
     "bootstrap": "^5.3.3",
     "firebase": "^10.14.0",
+    "lucide-react": "^0.453.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-contribution-calendar": "^1.5.0",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/node": "^22.7.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
@@ -39,7 +41,7 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.13",
+    "tailwindcss": "^3.4.14",
     "vite": "^5.4.1"
   }
 }

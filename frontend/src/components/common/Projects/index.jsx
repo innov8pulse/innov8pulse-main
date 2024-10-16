@@ -12,23 +12,23 @@ import abi from './MyContractAbi.json'; // Import ABI
 const MainProjectsPage = () => {
   const [projects, setProjects] = useState([]);
   const { address } = useAccount(); // Get the connected wallet address
- // Use the Provider class with the rpc URL
- const provider = new RpcProvider({
-  nodeUrl: 'https://starknet-sepolia.public.blastapi.io/rpc/v0_7',
-});
+//  // Use the Provider class with the rpc URL
+//  const provider = new RpcProvider({
+//   nodeUrl: 'https://starknet-sepolia.public.blastapi.io/rpc/v0_7',
+// });
 
-const privateKey = process.env.ACCOUNT_PRIVKEY;
+// const privateKey = process.env.ACCOUNT_PRIVKEY;
 
-const accountAddress = '0x03553b785b4e9a6496118b6341c44700f209c60e50b8db7ef4ba8fb681a05cde';
+// const accountAddress = '0x03553b785b4e9a6496118b6341c44700f209c60e50b8db7ef4ba8fb681a05cde';
 
-// Initialize the account
-const account = new Account(provider, accountAddress, privateKey);
+// // Initialize the account
+// const account = new Account(provider, accountAddress, privateKey);
 
-// Initialize deployed contract
-const testAddress = '0x29724d03151eff483f60b7f556593beb1f600bac9b5372240f924bc5b07fe18';
+// // Initialize deployed contract
+// const testAddress = '0x29724d03151eff483f60b7f556593beb1f600bac9b5372240f924bc5b07fe18';
 
-// Connect the contract
-const myTestContract = new Contract(abi, testAddress, provider);
+// // Connect the contract
+// const myTestContract = new Contract(abi, testAddress, provider);
 
   useEffect(() => {
     const fetchProjects = async () => {
