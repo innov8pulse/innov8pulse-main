@@ -1,0 +1,243 @@
+[
+    {
+        "type": "impl",
+        "name": "Implnnov8Pulse",
+        "interface_name": "contract::IInnov8Pulse"
+    },
+    {
+        "type": "struct",
+        "name": "contract::Innov8Pulse::Project",
+        "members": [
+            {
+                "name": "project_id",
+                "type": "core::felt252"
+            },
+            {
+                "name": "project_name",
+                "type": "core::felt252"
+            },
+            {
+                "name": "description",
+                "type": "core::felt252"
+            },
+            {
+                "name": "owner",
+                "type": "core::starknet::contract_address::ContractAddress"
+            }
+        ]
+    },
+    {
+        "type": "interface",
+        "name": "contract::IInnov8Pulse",
+        "items": [
+            {
+                "type": "function",
+                "name": "submit_project",
+                "inputs": [
+                    {
+                        "name": "project_id",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "project_name",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "description",
+                        "type": "core::felt252"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "get_project",
+                "inputs": [
+                    {
+                        "name": "project_id",
+                        "type": "core::felt252"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "type": "contract::Innov8Pulse::Project"
+                    }
+                ],
+                "state_mutability": "view"
+            },
+            {
+                "type": "function",
+                "name": "track_contribution",
+                "inputs": [
+                    {
+                        "name": "project_id",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "contributor",
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    },
+                    {
+                        "name": "contribution",
+                        "type": "core::felt252"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "provide_feedback",
+                "inputs": [
+                    {
+                        "name": "project_id",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "feedback",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "mentor",
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "get_all_projects",
+                "inputs": [],
+                "outputs": [],
+                "state_mutability": "view"
+            }
+        ]
+    },
+    {
+        "type": "constructor",
+        "name": "constructor",
+        "inputs": []
+    },
+    {
+        "type": "event",
+        "name": "contract::Innov8Pulse::ProjectSubmitted",
+        "kind": "struct",
+        "members": [
+            {
+                "name": "project_id",
+                "type": "core::felt252",
+                "kind": "key"
+            },
+            {
+                "name": "project_name",
+                "type": "core::felt252",
+                "kind": "data"
+            },
+            {
+                "name": "description",
+                "type": "core::felt252",
+                "kind": "data"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "contract::Innov8Pulse::ContributionTracked",
+        "kind": "struct",
+        "members": [
+            {
+                "name": "project_id",
+                "type": "core::felt252",
+                "kind": "key"
+            },
+            {
+                "name": "contributor",
+                "type": "core::starknet::contract_address::ContractAddress",
+                "kind": "data"
+            },
+            {
+                "name": "contribution",
+                "type": "core::felt252",
+                "kind": "data"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "contract::Innov8Pulse::FeedbackProvided",
+        "kind": "struct",
+        "members": [
+            {
+                "name": "project_id",
+                "type": "core::felt252",
+                "kind": "key"
+            },
+            {
+                "name": "mentor",
+                "type": "core::starknet::contract_address::ContractAddress",
+                "kind": "data"
+            },
+            {
+                "name": "feedback",
+                "type": "core::felt252",
+                "kind": "data"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "contract::Innov8Pulse::AllProjectsRetrieved",
+        "kind": "struct",
+        "members": [
+            {
+                "name": "project_id",
+                "type": "core::felt252",
+                "kind": "key"
+            },
+            {
+                "name": "project_name",
+                "type": "core::felt252",
+                "kind": "data"
+            },
+            {
+                "name": "description",
+                "type": "core::felt252",
+                "kind": "data"
+            },
+            {
+                "name": "owner",
+                "type": "core::starknet::contract_address::ContractAddress",
+                "kind": "data"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "contract::Innov8Pulse::Event",
+        "kind": "enum",
+        "variants": [
+            {
+                "name": "ProjectSubmitted",
+                "type": "contract::Innov8Pulse::ProjectSubmitted",
+                "kind": "nested"
+            },
+            {
+                "name": "ContributionTracked",
+                "type": "contract::Innov8Pulse::ContributionTracked",
+                "kind": "nested"
+            },
+            {
+                "name": "FeedbackProvided",
+                "type": "contract::Innov8Pulse::FeedbackProvided",
+                "kind": "nested"
+            },
+            {
+                "name": "AllProjectsRetrieved",
+                "type": "contract::Innov8Pulse::AllProjectsRetrieved",
+                "kind": "nested"
+            }
+        ]
+    }
+]

@@ -1,56 +1,79 @@
-/* AddProjectCard.css */
-
 /* Card Styles */
 .card {
-    width: 200px; /* Set the width of the card */
-    height: 200px; /* Set the height of the card */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed #17202a; /* Dashed border for the card */
-    border-radius: 10px; /* Rounded corners */
-    background-color: #17202a; /* Light background color */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth transition */
-  }
-  
-  .card:hover {
-    background-color: #17202a; /* Change background on hover */
-  }
-  
-  /* Modal Styles */
-  .modal-header {
-    background-color: #17202a; /* Header background color */
-    color: white; /* Header text color */
-  }
-  
-  .modal-title {
-    font-size: 1.5rem; /* Increase title font size */
-  }
-  
-  .modal-body {
-    padding: 20px; /* Add padding to the body */
-    width: 100px;
-    height: fit-content;
-  }
-  
-  /* Form Styles */
-  .form-control {
-    border: 1px solid #ced4da; /* Default border color */
-    border-radius: 0.25rem; /* Rounded corners for form controls */
-  }
-  
-  .form-control:focus {
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add shadow on focus */
-  }
-  
-  textarea {
-    resize: none; /* Disable resizing */
-  }
-  
-  /* Footer Styles */
-  .modal-footer {
-    justify-content: space-between; /* Space out footer buttons */
-  }
-  
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #3498db; /* Subtle blue border */
+  border-radius: 10px;
+  background-color: #f1f1f1; /* Light background color */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card:hover {
+  background-color: #e9ecef; /* Slightly darker on hover */
+}
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Auto layout for projects */
+  gap: 20px;
+  padding: 20px;
+}
+
+.project-card, .card {
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Modal Styles */
+.modal-header {
+  background-color: #17202a; /* Dark header */
+  color: white;
+}
+
+.modal-title {
+  font-size: 1.25rem; /* Regular title font size */
+  font-weight: 600;
+}
+
+.modal-body {
+  padding: 15px; /* Standard padding for body */
+}
+
+.modal-footer {
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
+/* Form Styles */
+.form-control {
+  border-radius: 0.25rem; /* Keep the default rounded corners */
+  padding: 10px; /* Add padding for better spacing */
+}
+
+.form-control:focus {
+  border-color: #3498db; /* Stark blue for focus */
+  box-shadow: none; /* Remove default shadow for a cleaner look */
+}
+
+textarea {
+  resize: none; /* Disable resizing for a consistent look */
+}
+
+.text-danger {
+  font-size: 0.875rem; /* Smaller font for error messages */
+}
+
+button {
+  padding: 8px 16px; /* Standard padding for buttons */
+  font-size: 0.875rem; /* Normal button text size */
+  border-radius: 5px;
+}
+
+button:focus {
+  outline: none;
+}
