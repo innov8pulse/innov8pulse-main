@@ -11,6 +11,7 @@ Currently, two official plugins are available:
 Innov8Pulse is a platform that allows hackathon participants to showcase their projects, track contributions, and receive feedback and mentorship from industry experts. By integrating blockchain, the platform also provides a way to assign value to projects through tokens, ensuring accountability and ownership over innovative ideas.
 
 ### Table of Contents
+Documentation  
 Project Overview 
 Features  
 Tech Stack  
@@ -21,6 +22,14 @@ Installation
 Usage  
 API Documentation  
 Blockchain Integration  
+
+## Documentation
+Here are the links to:
+### 1. The Pitchdeck
+https://www.canva.com/design/DAGPt2RoaI8/fTZXOsS-yddJtVCvEFbtug/view?utm_content=DAGPt2RoaI8&utm_campaign=designshare&utm_medium=link&utm_source=editor
+
+### 2. The Docs
+https://docs.google.com/document/d/1fbXG_xEpqDg-mkP6rmdT_iMwjuKABOln/edit?usp=sharing&ouid=102275064318286660251&rtpof=true&sd=true
 
 ## Project Overview
 Innov8Pulse was designed to solve the problem of post-hackathon project abandonment by giving participants a platform where they can:  
