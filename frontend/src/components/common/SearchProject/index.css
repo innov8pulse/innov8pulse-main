@@ -1,0 +1,6 @@
+.divider{
+    border: none; /* Remove default border */
+  height: 1px; /* Set height for the divider */
+  background-color: #17202a; /* Set color for the divider */
+  margin: 20px 0;
+}

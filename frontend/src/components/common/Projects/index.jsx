@@ -1,61 +1,101 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { app } from '../../../firebaseConfig'; 
 import SearchProject from "../SearchProject";
-import AddProjectCard from "../AddProjectCard"; // Import the AddProjectCard
+import AddProjectCard from "../AddProjectCard";
 import "../Projects/index.css";
-import { useAccount } from '@starknet-react/core'; // To check if the wallet is connected
-import { RpcProvider } from 'starknet';
-import abi from './MyContractAbi.json'; // Import ABI
-
+import { useAccount } from '@starknet-react/core'; 
+import { Link } from 'react-router-dom';
 
 const MainProjectsPage = () => {
   const [projects, setProjects] = useState([]);
-  const { address } = useAccount(); // Get the connected wallet address
-//  // Use the Provider class with the rpc URL
-//  const provider = new RpcProvider({
-//   nodeUrl: 'https://starknet-sepolia.public.blastapi.io/rpc/v0_7',
-// });
-
-// const privateKey = process.env.ACCOUNT_PRIVKEY;
-
-// const accountAddress = '0x03553b785b4e9a6496118b6341c44700f209c60e50b8db7ef4ba8fb681a05cde';
-
-// // Initialize the account
-// const account = new Account(provider, accountAddress, privateKey);
-
-// // Initialize deployed contract
-// const testAddress = '0x29724d03151eff483f60b7f556593beb1f600bac9b5372240f924bc5b07fe18';
-
-// // Connect the contract
-// const myTestContract = new Contract(abi, testAddress, provider);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const { address } = useAccount();
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      const db = getFirestore(app); // Initialize Firestore with the app instance
-      const projectsCollection = collection(db, 'projects'); // Access the projects collection
-      const projectSnapshot = await getDocs(projectsCollection); // Get documents
-      const projectList = projectSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })); // Map documents to data
-      setProjects(projectList); // Set the projects state
-    };
-    fetchProjects();
+    const db = getFirestore(app);
+    const projectsCollection = collection(db, 'projects');
+
+    const unsubscribe = onSnapshot(projectsCollection, (snapshot) => {
+      const projectList = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setProjects(projectList);
+      setFilteredProjects(projectList); 
+    });
+
+    return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const filtered = projects.filter(project =>
+      project.projectName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProjects(filtered);
+  }, [searchTerm, projects]);
+
+  const addProject = (newProject) => {
+    setProjects((prevProjects) => [...prevProjects, newProject]);
+    setFilteredProjects((prevFiltered) => [...prevFiltered, newProject]); 
+  };
+
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div>
-      <SearchProject />
-      
-      {/* Add the "Add Project" card if wallet is connected */}
-      {address && <AddProjectCard />}
-
+      <SearchProject searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {address && <AddProjectCard addProject={addProject} />} {/* Pass addProject as prop */}
       <div className="project-list">
-        {projects.map((project) => (
-          <div key={project.id} className="project-card">
-            <h3>{project.projectName}</h3>
-            <p>{project.projectDescription}</p>
-          </div>
-        ))}
+        {filteredProjects.length > 0 ? (
+          filteredProjects.map((project) => (
+            <Link to={`/projects/${encodeURIComponent(project.projectName)}`} key={project.id}>
+              <div className="taikai-card">
+                <div className="project-image">
+                  <img
+                    src={project.image || "https://via.placeholder.com/300"} // Display uploaded image
+                    alt={project.projectName}
+                  />
+                  <span
+                    className="project-state-badge"
+                    style={{
+                      backgroundColor: '#550767',
+                      color: 'white',
+                      padding: '5px 10px',
+                      borderRadius: '5px',
+                    }}
+                  >
+                    {project.projectState}
+                  </span>
+                </div>
+                <div className='detailss'>
+                <span className="contributors-count">
+                  <i className="fas fa-users"></i> {project.contributors ? project.contributors.split(',').length : 0}
+                </span>
+                <h3 className="project-title">{project.projectName}</h3>
+                <p className={`project-description ${isExpanded ? 'expanded' : ''}`}>
+      {project.projectDescription}
+    </p>
+    
+    {project.projectDescription.split(' ').length > 50 && (
+      <span className="read-more-btn" onClick={() => setIsExpanded(!isExpanded)}>
+        {isExpanded ? 'Read less' : 'Read more'}
+      </span>
+    )}
+                <div className="project-info">
+                  <div className='tags-container'>
+                    {project.tags.split(',').map((tag, index) => (
+                      <span key={index} className="tag">{tag.trim()}</span>
+                    ))}
+                  </div>
+                </div>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <p>No projects found.</p>
+        )}
       </div>
+
+      <AddProjectCard />
     </div>
   );
 };

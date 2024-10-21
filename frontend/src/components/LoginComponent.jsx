@@ -25,10 +25,9 @@ export default function LoginComponent() {
     };
   
     const googleSignIn = async () => {
-      const response = await GoogleSignInAPI(); // Await the API response
+      const response = await GoogleSignInAPI(); 
       if (response) {
         toast.success("Sign-in successful!");
-        // You can handle the signed-in user here, e.g., redirect or store user info
         navigate("/home"); 
       } else {
         toast.error("Sign-in failed or cancelled!");
@@ -52,7 +51,7 @@ export default function LoginComponent() {
             className="common-input"
             placeholder="email or phone"
           />
-          <div className="password-container"> {/* Container for password input and toggle */}
+          <div className="password-container"> 
             <input
               onChange={(event) =>
                 setCredentials({ ...credentails, password: event.target.value })

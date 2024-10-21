@@ -23,7 +23,7 @@ export default function RegisterComponent() {
             "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
         });
         localStorage.setItem("userEmail", res.user.email);
-        navigate("/home");
+        navigate("/login");
       } catch (err) {
         console.log("Error posting user data:", err);
         toast.error("Account created, but failed to save user data.");

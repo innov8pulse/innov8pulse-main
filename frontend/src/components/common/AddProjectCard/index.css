@@ -1,15 +1,14 @@
 /* Card Styles */
 .card {
-  width: 300px;
-  height: 200px;
+  background-color: #f1f1f1;
+  border: 2px dashed #aaa;
+  width: 250px;
+  height: 250px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  border: 2px dashed #3498db; /* Subtle blue border */
-  border-radius: 10px;
-  background-color: #f1f1f1; /* Light background color */
+  align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin-bottom: 20px;
 }
 
 .card:hover {
@@ -77,3 +76,21 @@ button {
 button:focus {
   outline: none;
 }
+
+
+.card {
+  cursor: pointer;
+  border: 1px dashed #ccc; /* Example style */
+  padding: 20px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.card:hover {
+  background-color: #f0f0f0; /* Hover effect */
+}
+
+.toast {
+  z-index: 1050; /* Ensure it appears above other content */
+}
+
