@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
+body {
+  background-color: #17202a;
+}
 .login-wrapper {
   background-color: #ffffff !important;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     .login-wrapper-inner {
       display: flex;
       flex-direction: column;
@@ -134,8 +140,8 @@
 
 .error-label {
   color: red;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 11px;
+  margin-top: 0px;
 }
 
 .password-toggle{
@@ -187,3 +193,71 @@
   width: 200px;
   background-color: #f9f9f9;
 }
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px; 
+  font-family: 'Inter', sans-serif; 
+}
+
+.pagination-btn {
+  background-color: #17202a; /* Primary color */
+  color: white;
+  padding: 2px 2px; 
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-btn:hover:not(.disabled) {
+  background-color: #17202a; /* Darker shade on hover */
+}
+
+.pagination-btn.disabled {
+  background-color: #ccc; /* Gray color for disabled buttons */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 10px; /* Space between page numbers */
+}
+
+.pagination-number {
+  padding: 2px 9px; /* Padding for page numbers */
+  cursor: pointer;
+  font-size: 16px;
+  color: #17202a; /* Primary color */
+  border: 1px solid #17202a; /* Border around numbers */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination-number:hover {
+  background-color: #17202a; /* Background on hover */
+  color: white; /* Text color on hover */
+}
+
+.pagination-number.active {
+  background-color: #17202a; /* Active page background */
+  color: white; /* Active page text color */
+  font-weight: bold; /* Bold text for active page */
+}
+
+@media (max-width: 768px) {
+  .pagination-container {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .pagination-btn {
+    padding: 8px 12px; /* Smaller padding for buttons on small screens */
+  }
+
+  .pagination-number {
+    padding: 8px;
+  }}

@@ -30,14 +30,23 @@
 }
 
 /* Modal Styles */
-.modal-header {
-  background-color: #17202a; /* Dark header */
-  color: white;
+/* Modal Styles */
+.modal {
+  position: fixed; /* Use fixed positioning */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset to ensure true center */
+  z-index: 1100; /* Ensure it appears above other content */
+  width: 600px; /* Adjust width as needed */
+  height: auto; /* Allow for height to adjust */
+  padding: 20px; /* Add some padding */
+  background-color: white; /* Ensure modal background is visible */
+  border-radius: 10px; /* Optional: for rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: for shadow effect */
 }
 
-.modal-title {
-  font-size: 1.25rem; /* Regular title font size */
-  font-weight: 600;
+.modal-header{
+  justify-content: center; 
 }
 
 .modal-body {
@@ -47,6 +56,7 @@
 .modal-footer {
   justify-content: flex-end; /* Align buttons to the right */
 }
+
 
 /* Form Styles */
 .form-control {
@@ -94,3 +104,17 @@ button:focus {
   z-index: 1050; /* Ensure it appears above other content */
 }
 
+.small-modal {
+  width: 300px; /* Adjust width as needed */
+  height: auto; /* Allow for height to adjust */
+  padding: 10px; /* Add some padding */
+}
+
+.modal-header {
+  justify-content: center; /* Center the title */
+}
+
+.error-text {
+  padding: 3px;
+  color: red;
+}

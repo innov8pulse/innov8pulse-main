@@ -4,6 +4,7 @@ import { getFirestore, collection, addDoc, query, where, getDocs } from 'firebas
 import { auth } from '../../../firebaseConfig';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import "../AddProjectCard/index.css";
+import Loader from '../Loader';
 
 const AddProjectCard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -51,7 +52,7 @@ const AddProjectCard = () => {
       return;
     }
 
-    setLoading(true); // Set loading to true when submission starts
+    setLoading(true); 
     const user = auth.currentUser;
     if (user) {
       try {
@@ -161,14 +162,17 @@ const AddProjectCard = () => {
 
   return (
     <div>
-      <div className="card" onClick={handleOpenModal}>
-        <div className="card-body text-center">
-          <h2>+</h2>
-        </div>
-      </div>
+      <div className="taikai-card" onClick={handleOpenModal}>
+  <div className="card-body text-center">
+    <h2 style={{ fontSize: '48px', margin: '43%', display:'flex', alignItems:'center' }}>+</h2> 
+  </div>
+</div>
+
+
+
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Register a Project</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -182,8 +186,10 @@ const AddProjectCard = () => {
                 className="mb-2"
               />
               {errors.projectName && (
-                <Form.Text className="text-danger">{errors.projectName}</Form.Text>
-              )}
+  <Form.Text className="error-text">{errors.projectName}</Form.Text>
+)}
+
+
             </Form.Group>
 
             <Form.Group controlId="projectDescription">
@@ -195,9 +201,10 @@ const AddProjectCard = () => {
                 placeholder="Enter project description"
                 className="mb-2"
               />
-              {errors.projectDescription && (
-                <Form.Text className="text-danger">{errors.projectDescription}</Form.Text>
-              )}
+              {errors.projectName && (
+  <Form.Text className="error-text">{errors.projectDescription}</Form.Text>
+)}
+
             </Form.Group>
 
             <Form.Group controlId="contributors">
@@ -207,10 +214,10 @@ const AddProjectCard = () => {
                 onChange={(e) => setContributors(e.target.value)}
                 placeholder="Enter contributors"
                 className="mb-2"
-              />
-              {errors.contributors && (
-                <Form.Text className="text-danger">{errors.contributors}</Form.Text>
+              />{errors.projectName && (
+                <Form.Text className="error-text">{errors.contributors}</Form.Text>
               )}
+              
             </Form.Group>
 
             <Form.Group controlId="tags">
@@ -220,10 +227,10 @@ const AddProjectCard = () => {
                 onChange={(e) => setTags(e.target.value)}
                 placeholder="Enter tags"
                 className="mb-2"
-              />
-              {errors.tags && (
-                <Form.Text className="text-danger">{errors.tags}</Form.Text>
+              />{errors.projectName && (
+                <Form.Text className="error-text">{errors.tags}</Form.Text>
               )}
+              
             </Form.Group>
 
             <Form.Group controlId="image">
@@ -233,10 +240,9 @@ const AddProjectCard = () => {
                 accept="image/*"
                 onChange={handleImageChange}
                 className="mb-2"
-              />
-              {errors.image && (
-                <Form.Text className="text-danger">{errors.image}</Form.Text>
-              )}
+              />{errors.projectName && (
+                <Form.Text className="error-text">{errors.image}</Form.Text>
+              )}              
             </Form.Group>
 
             <Form.Group controlId="website">
@@ -290,7 +296,7 @@ const AddProjectCard = () => {
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit} disabled={loading}>
-            {loading ? 'Submitting...' : 'Submit'} {/* Button text changes based on loading state */}
+            {loading ? 'Submitting': 'Submit'} 
           </Button>
         </Modal.Footer>
       </Modal>
@@ -298,6 +304,8 @@ const AddProjectCard = () => {
       <Toast onClose={() => setShowToast(false)} show={showToast} delay={3000} autohide style={{ position: 'absolute', top: 20, right: 20 }}>
         <Toast.Body>{projectName} added</Toast.Body>
       </Toast>
+
+      
     </div>
   );
 };

@@ -69,7 +69,7 @@
 }
 
 .connect-wallet-btn, .disconnect-wallet-btn {
-  background-color: #3498db;
+  background-color: #ff6f61;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -80,7 +80,7 @@
 }
 
 .connect-wallet-btn:hover, .disconnect-wallet-btn:hover {
-  background-color: #2980b9;
+  background-color: #ff6f61;
 }
 
 .connected-wallet {
@@ -162,3 +162,47 @@
   background-color: #17202a;
   color: #ffffff;
 }
+
+.dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  background-color: #1f1f1f;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  min-width: 150px;
+  display: block;
+  align-items: center;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  color: #ffffff;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  border-bottom: 1px;
+}
+
+/* Hover effect for dropdown items */
+.dropdown-item:hover {
+  /* background-color: #ff6f61; Light blue hover */
+  color: #ffffff;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+

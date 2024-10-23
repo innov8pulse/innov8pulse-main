@@ -1,5 +1,6 @@
-import { firestore } from "../firebaseConfig";
+import { app, firestore } from "../firebaseConfig";
 import {
+  getFirestore,
   addDoc,
   collection,
   onSnapshot,
@@ -13,6 +14,8 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
+
+const db = getFirestore();
 
 let postsRef = collection(firestore, "posts");
 let userRef = collection(firestore, "users");
@@ -73,13 +76,12 @@ export const getSingleUser = (setCurrentUser, email) => {
   });
 };
 
-export const postUserData = (object) => {
-  addDoc(userRef, object)
-    .then(() => {})
-    .catch((err) => {
-      console.log(err);
-    });
+export const postUserData = async (userData) => {
+  // Save user data to Firestore
+  await setDoc(doc(db, "users", userData.userID), userData, { merge: true });
 };
+
+
 
 export const getCurrentUser = (setCurrentUser) => {
   onSnapshot(userRef, (response) => {

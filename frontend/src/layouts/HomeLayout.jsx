@@ -10,7 +10,6 @@ export default function HomeLayout() {
     }, []);
     return (
         <div>
-            <Topbar />
             <Home />
         </div>
     

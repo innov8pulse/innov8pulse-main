@@ -97,7 +97,6 @@
     color: #17202a;
   }
   
-  /* Action Buttons */
   .action-buttons {
     text-align: center;
     margin: 20px 0;
@@ -106,9 +105,9 @@
   }
 
   .action-buttons button{
-    width: 80%;
+    width: 70%;
     margin: 10px 0;
-    background-color: #17202a;
+    background-color: #f7654a;
   }
   
   .btn-secondary {
@@ -162,3 +161,7 @@
     top: 50%;
   }
   
+
+  p {
+    font-size: 15px;
+  }

@@ -1,24 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LogoWhite from "../../../assets/logo-white-bg.png";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Dropdown } from 'react-bootstrap';
 import { auth } from '../../../firebaseConfig';
 import { useStarknetkitConnectModal } from 'starknetkit';
 import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
+import { getDoc, doc } from "firebase/firestore"; // Import Firestore methods
+import { db } from "../../../firebaseConfig"; // Import your Firestore configuration
 
 const Topbar = () => {
   let navigate = useNavigate();
-
+  
   const { connect, connectors } = useConnect();
   const { starknetkitConnectModal } = useStarknetkitConnectModal({
-    connectors: connectors,  // Removed "as any" assertion
+    connectors: connectors,
   });
 
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
+
+  const [userRole, setUserRole] = useState(""); // Store user role
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showProjectModal, setShowProjectModal] = useState(false); // Modal for mentor without projects
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          const docRef = doc(db, "users", user.userID);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            setUserRole(userData.role);  
+            console.log("User role:", userData.role);  // Log the role for debugging
+          } else {
+            console.log("No such document!");
+          }
+        } catch (error) {
+          console.error("Error fetching user role:", error);
+        }
+      }
+    };
+  
+    fetchUserRole();
+  }, []);
 
   const formatAddress = (addr) => {
     return addr ? `${addr.slice(0, 5)}...${addr.slice(-4)}` : '';
@@ -35,8 +64,6 @@ const Topbar = () => {
     disconnect();
   };
 
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-
   const handleLogout = async () => {
     try {
       await auth.signOut();
@@ -44,6 +71,20 @@ const Topbar = () => {
     } catch (error) {
       console.error("Logout Error:", error);
     }
+  };
+
+  const handleMyProjects = () => {
+    if (userRole === 'participant') {
+      navigate("/myprojects");
+    } else if (userRole === 'mentor') {
+      navigate("/myprojects");
+      setShowProjectModal(true);
+    }
+  };
+
+  const closeModals = () => {
+    setShowLogoutModal(false);
+    setShowProjectModal(false);
   };
 
   const CustomModal = ({ show, onClose, onConfirm }) => {
@@ -76,17 +117,39 @@ const Topbar = () => {
       <div className="nav-items">
         <ul>
           <li onClick={() => navigate("/projects")}>Projects</li>
-          <li onClick={() => navigate("/leaderboard")}>Leaderboard</li>
+          <li onClick={() => navigate("/leaderboard")}>Builders</li>
           <li onClick={() => navigate("/organizations")}>Organizations</li>
+          <li onClick={() => navigate("/learn")}>Learn</li>
         </ul>
       </div>
       <div className="react-icons">
         <FaBell size={30} className="react-icon" />
-        <FaUserCircle
-          size={30}
-          className="react-icon"
-          onClick={() => setShowLogoutModal(true)} 
-        />
+
+        {/* Dropdown Menu for User */}
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <FaUserCircle size={30} className="react-icon" />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => navigate("/myprojects")}>My Projects</Dropdown.Item>
+            <Dropdown.Item onClick={() => setShowLogoutModal(true)}>Logout</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        {/* Project Modal for Mentor with no Projects */}
+        <Modal show={showProjectModal} onHide={closeModals}>
+          <Modal.Header closeButton>
+            <Modal.Title>No Projects</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            You are not contributing to any project at the moment.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={closeModals}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+
         <div className="wallet-section">
           {!address ? (
             <button className="connect-wallet-btn" onClick={connectWallet}>Connect Wallet</button>
@@ -108,55 +171,3 @@ const Topbar = () => {
 };
 
 export default Topbar;
-
-
-// import React from "react";
-// import LogoWhite from "../../../assets/logo-white-bg.png";
-// import "./index.css";
-// import { useNavigate } from "react-router-dom";
-// import { FaUserCircle } from "react-icons/fa";
-// import { FaBell } from "react-icons/fa";
-
-// const Topbar = ({ showLogin = false }) => { // Added showLogin prop
-//   let navigate = useNavigate();
-
-//   const handleLogin = () => {
-//     // Handle login functionality here
-//     console.log("Login button clicked");
-//     // Navigate to login page or trigger login modal
-//   };
-
-//   return (
-//     <div className="topbar-main">
-//       <div className="Logo">
-//         <img
-//           src={LogoWhite}
-//           className="BarLogo"
-//           onClick={() => navigate("/home")}
-//           alt="Logo"
-//         />
-//       </div>
-//       {!showLogin ? ( // Conditional rendering
-//         <div className="nav-items">
-//           <ul>
-//             <li onClick={() => navigate("/projects")}>Projects</li>
-//             <li onClick={() => navigate("/leaderboard")}>Leaderboard</li>
-//             <li onClick={() => navigate("/organizations")}>Organizations</li>
-//           </ul>
-//         </div>
-//       ) : (
-//         <div className="nav-items">
-//           <button className="login-button" onClick={handleLogin}>
-//             Login
-//           </button>
-//         </div>
-//       )}
-//       <div className="react-icons">
-//         <FaBell size={30} className="react-icon" />
-//         <FaUserCircle size={30} className="react-icon" />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Topbar;

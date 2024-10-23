@@ -8,6 +8,8 @@ import Projects from "../components/common/Projects";
 import MyProjects from "../Pages/MyProjects";
 import PrivateRoute from "./privateroute"; 
 import ProjectDetail from "../components/ProjectDetail";
+// import RoleProtectedRoute from '../auth/RoleProvider';
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -46,15 +48,23 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/myprojects",
+    path: "/projects/page/:pageNumber",  
     element: (
       <PrivateRoute>
+        <Projects />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/myprojects",
+    element: (
+      <PrivateRoute allowedRole='participant'>
         <MyProjects />
       </PrivateRoute>
     ),
   },
   {
-    path: "/projects/:projectName", 
+    path: "/projects/:projectName",
     element: (
       <PrivateRoute>
         <ProjectDetail />
@@ -62,4 +72,3 @@ export const router = createBrowserRouter([
     ),
   },
 ]);
-    

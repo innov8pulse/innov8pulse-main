@@ -7,10 +7,12 @@ import Topbar from "../components/common/Topbar";
 import './ProjectDetail.css';
 
 const ProjectDetail = () => {
-  const { projectName } = useParams(); // Get project name from URL params
-  const [project, setProject] = useState(null); // Set project as null initially
-  const [loading, setLoading] = useState(true); // Loading state
+  const { projectName } = useParams(); 
+  const [project, setProject] = useState(null); 
+  const [loading, setLoading] = useState(true); 
   const [activeTab, setActiveTab] = useState('Overview');
+  const [userRole, setUserRole] = useState('participant'); 
+  const [notificationSent, setNotificationSent] = useState(false);
 
   const tabs = ['Overview', 'Timeline', 'Rules', 'Prizes', 'FAQs', 'Updates', 'Participants'];
 
@@ -19,31 +21,27 @@ const ProjectDetail = () => {
       const db = getFirestore(app);
       const projectsRef = collection(db, 'projects');
 
-      // Query the projects collection where projectName matches the URL param
       const q = query(projectsRef, where('projectName', '==', projectName));
       
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
-        // Assuming project names are unique, take the first match
         const projectData = querySnapshot.docs[0].data();
-        setProject(projectData); // Set the project data
+        setProject(projectData); 
       } else {
         console.error("Project not found");
       }
 
-      setLoading(false); // Stop loading once the data is fetched
+      setLoading(false); 
     };
 
     fetchProject();
   }, [projectName]);
 
-  // Show a loader while the data is being fetched
   if (loading) {
     return <Loader />;
   }
 
-  // Handle case when no project is found or project is null
   if (!project) {
     return <div>Project not found or unavailable.</div>;
   }
@@ -52,11 +50,26 @@ const ProjectDetail = () => {
     setActiveTab(tab);
   };
 
+  const handleContributeClick = async () => {
+    const db = getFirestore(app);
+    const ownerRef = doc(db, 'users', project.ownerId); 
+    const notificationData = {
+      message: `Mentor wants to contribute to your project: ${project.projectName}`,
+      projectId: projectName,
+      timestamp: new Date(),
+      status: 'pending' 
+    };
+
+    await setDoc(doc(db, 'notifications', ownerRef.id), notificationData, { merge: true });
+    
+    setNotificationSent(true); 
+    alert("Your request to contribute has been sent to the project owner."); 
+  };
+
   return (
     <>
     <Topbar />
     <div className="project-container">
-      {/* Header Section */}
       <div className="project-header">
         <img 
           src={project.image || "https://via.placeholder.com/1400x400"} 
@@ -65,7 +78,6 @@ const ProjectDetail = () => {
         />
       </div>
 
-      {/* Navigation Tabs */}
       <div className="tab-container">
         {tabs.map((tab, index) => (
           <div
@@ -83,7 +95,6 @@ const ProjectDetail = () => {
   <div className="header">
     <h1>{project.projectName}</h1>
     <p>{project.projectDescription}</p>
-    {/* Action Buttons */}
       <div className="action-buttons">
         {project.website && (
           <a href={project.website} target="_blank" rel="noopener noreferrer">
@@ -100,18 +111,26 @@ const ProjectDetail = () => {
             <button className="btn-secondary">VIEW GITHUB REPO</button>
           </a>
         )}
+        {userRole === 'mentor' && (
+                <button className="btn-primary" onClick={handleContributeClick}>
+                  Ask to Contribute
+                </button>
+              )}
       </div>
   </div>
 
-  {/* Tab Content */}
   <div className="tab-content">
     {activeTab === 'Overview' && (
       <div>
         <h2>{project.projectName}</h2>
         <p>
-          The {project.projectName} Hackathon focuses on leveraging technologies to tackle challenges 
+          The {project.projectName} project focuses on leveraging technologies to tackle challenges 
           related to {project.tags}. This event brings together coders, problem-solvers, and innovators 
-          to develop cutting-edge solutions in fields like {project.projectState}.
+          to develop cutting-edge solutions in fields like {project.projectState}. 
+        </p>
+        <p>
+          Contribute to {project.projectName} by clicking the discord button and the owner will 
+          let you in. Happy building.
         </p>
       </div>
     )}
@@ -217,16 +236,15 @@ const ProjectDetail = () => {
 
       
 
-      {/* Event Information Section */}
       <div className="event-info">
         <h3>Event Dates</h3>
         <p>
-          Start Date: {project.startDate || "Not Provided"}<br />
-          End Date: {project.endDate || "Not Provided"}
+          Start Date: {project.startDate || ""}<br />
+          End Date: {project.endDate || ""}
         </p>
         <p>
-          Join the {project.projectName} hackathon from {new Date(project.createdAt.seconds * 1000).toDateString()}.
-          This event will provide a great opportunity for learning and building innovative solutions.
+          The {project.projectName} project was registered on the platform on {new Date(project.createdAt.seconds * 1000).toDateString()}.
+          
         </p>
       </div>
     </div>

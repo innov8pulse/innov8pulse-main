@@ -25,10 +25,9 @@ export default function LandingComponent() {
   useEffect(() => {
     const videoElement = videoRef.current;
 
-    // Loop the video
     const handleEnd = () => {
-      videoElement.currentTime = 0; // Reset to start
-      videoElement.play(); // Play again
+      videoElement.currentTime = 0; 
+      videoElement.play(); 
     };
 
     videoElement.addEventListener("ended", handleEnd);
@@ -76,8 +75,8 @@ export default function LandingComponent() {
               <h1 className="title">welcome to innov8Pulse.</h1>
               <div className="Hero-Heading-2">
                 <p className="subtitle">
-                  where innovation meets action
-                  <br></br>and ideas come to life
+                  fuelling innovation
+                  <br></br>beyond the event
                 </p>
               </div>
               <div className="button-container" style={{ textAlign: 'center', marginTop: '20px' }}>
