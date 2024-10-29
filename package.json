@@ -2,7 +2,8 @@
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "dotenv": "^16.4.5",
-    "firebase": "^10.14.0",
+    "firebase": "^10.14.1",
+    "react-datepicker": "^7.5.0",
     "react-firebase-hooks": "^5.1.1",
     "react-uuid": "^2.0.0",
     "uuid": "^10.0.0"

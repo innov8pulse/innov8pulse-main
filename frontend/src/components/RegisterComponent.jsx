@@ -82,7 +82,7 @@ export default function RegisterComponent() {
                     break;
                 default:
                     console.error(err); 
-                    toast.error("Check email and password credentials and try again."); 
+                    // toast.error("Check email and password credentials and try again."); 
             }
         } finally {
             setLoading(false); 

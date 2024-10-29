@@ -46,7 +46,7 @@ const MyProjectsComponent = () => {
             <SearchProject/>
             <div className="project-list">
                 {projects.length === 0 ? (
-                    <p style={{ color: '#17202a' }}>Create your first project!</p>
+                    <p style={{ color: '#17202a' }}>Create your first project!🎉</p>
                 ) : (
                     projects.map(project => (
                         <Link to={`/projects/${encodeURIComponent(project.projectName)}`} key={project.id}>

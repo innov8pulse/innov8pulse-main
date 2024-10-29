@@ -292,7 +292,7 @@ const AddProjectCard = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant="secondary" className='close-button' onClick={handleCloseModal}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit} disabled={loading}>

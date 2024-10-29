@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFirestore, query, where, getDocs, collection } from 'firebase/firestore';
+import { auth } from '../firebaseConfig';
 import { app } from '../firebaseConfig';
 import Loader from "../components/common/Loader";
 import Topbar from "../components/common/Topbar";
+// import Timeline from "../components/common/Timeline/Timeline";/
 import './ProjectDetail.css';
+import Timeline from './common/Timeline/Timeline';
+import Updates from './common/Updates/Updates';
+import Footer from './common/Footer/Footer';
+import Contributors from './common/Contributors/Contributors';
+import Prizes from './common/Prizes/Prizes';
 
-const ProjectDetail = () => {
+const ProjectDetail = ({ projectId }) => {
   const { projectName } = useParams(); 
   const [project, setProject] = useState(null); 
   const [loading, setLoading] = useState(true); 
   const [activeTab, setActiveTab] = useState('Overview');
   const [userRole, setUserRole] = useState('participant'); 
   const [notificationSent, setNotificationSent] = useState(false);
-
+  const currentUserId = auth.currentUser?.uid;
   const tabs = ['Overview', 'Timeline', 'Rules', 'Prizes', 'FAQs', 'Updates', 'Participants'];
+  const [projectData, setProjectData] = useState(null);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -136,8 +144,9 @@ const ProjectDetail = () => {
     )}
     {activeTab === 'Timeline' && (
   <div>
-    <h2>Timeline</h2>
-    <div className="timeline">
+    {/* <h2>Timeline</h2> */}
+    <Timeline isOwner={auth.currentUser && auth.currentUser.uid === project.userId} />
+    {/* <div className="timeline">
       <div className="timeline-event">
         <p>Created: {new Date(project.createdAt.seconds * 1000).toDateString()}</p>
       </div>
@@ -151,7 +160,7 @@ const ProjectDetail = () => {
           <p>This project has not yet won any prizes.</p>
         )}
       </div>
-    </div>
+    </div> */}
   </div>
 )}
 
@@ -180,7 +189,8 @@ const ProjectDetail = () => {
 
 {activeTab === 'Prizes' && (
   <div>
-    <h2>Prizes</h2>
+    <Prizes project={project} currentUserId={currentUserId} />
+    {/* <h2>Prizes</h2>
     {project.prizes && project.prizes.length > 0 ? (
       <ul>
         {project.prizes.map((prize, index) => (
@@ -189,7 +199,7 @@ const ProjectDetail = () => {
       </ul>
     ) : (
       <p>This project has not yet won any prizes.</p>
-    )}
+    )} */}
   </div>
 )}
 
@@ -217,17 +227,19 @@ const ProjectDetail = () => {
 )}
 {activeTab === 'Updates' && (
   <div>
-    <h2>Updates</h2>
+    <Updates currentUserId={currentUserId} projectOwnerId={project.userId} />
+    {/* <h2>Updates</h2>
     <ul>
       <li>Update 1: New contributors have joined the project.</li>
       <li>Update 2: The project has reached its first milestone.</li>
       <li>Update 3: The project is preparing for the second round of reviews.</li>
-    </ul>
+    </ul> */}
   </div>
 )}
 
     {activeTab === 'Participants' && (
       <div>
+         <Contributors />
       </div>
     )}
   </div>
@@ -248,6 +260,7 @@ const ProjectDetail = () => {
         </p>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };

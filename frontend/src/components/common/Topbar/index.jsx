@@ -132,7 +132,12 @@ const Topbar = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => navigate("/myprojects")}>My Projects</Dropdown.Item>
+            {/* Only show 'My Projects' if the user is not a mentor */}
+    {userRole !== 'mentor' && (
+      <Dropdown.Item onClick={() => navigate("/myprojects")}>
+        My Projects
+      </Dropdown.Item>
+    )}
             <Dropdown.Item onClick={() => setShowLogoutModal(true)}>Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

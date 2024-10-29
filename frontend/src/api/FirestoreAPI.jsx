@@ -78,7 +78,7 @@ export const getSingleUser = (setCurrentUser, email) => {
 
 export const postUserData = async (userData) => {
   // Save user data to Firestore
-  await setDoc(doc(db, "users", userData.userID), userData, { merge: true });
+  await setDoc(doc(db, "users", userData.userID), userData, { cdmerge: true });
 };
 
 
