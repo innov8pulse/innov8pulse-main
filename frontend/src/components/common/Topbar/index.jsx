@@ -8,8 +8,8 @@ import { Modal, Button, Dropdown } from 'react-bootstrap';
 import { auth } from '../../../firebaseConfig';
 import { useStarknetkitConnectModal } from 'starknetkit';
 import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
-import { getDoc, doc } from "firebase/firestore"; // Import Firestore methods
-import { db } from "../../../firebaseConfig"; // Import your Firestore configuration
+import { getDoc, doc } from "firebase/firestore"; 
+import { db } from "../../../firebaseConfig"; 
 
 const Topbar = () => {
   let navigate = useNavigate();
@@ -22,21 +22,24 @@ const Topbar = () => {
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
 
-  const [userRole, setUserRole] = useState(""); // Store user role
+  const [userRole, setUserRole] = useState(""); 
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [showProjectModal, setShowProjectModal] = useState(false); // Modal for mentor without projects
+  const [showProjectModal, setShowProjectModal] = useState(false); 
+  const [showDropdown, setShowDropdown] = useState(true);
 
   useEffect(() => {
     const fetchUserRole = async () => {
       const user = auth.currentUser;
       if (user) {
         try {
-          const docRef = doc(db, "users", user.userID);
+          // Use user.uid instead of user.userID
+          const docRef = doc(db, "users", user.uid);
           const docSnap = await getDoc(docRef);
+          
           if (docSnap.exists()) {
             const userData = docSnap.data();
             setUserRole(userData.role);  
-            console.log("User role:", userData.role);  // Log the role for debugging
+            console.log("User role:", userData.role); 
           } else {
             console.log("No such document!");
           }
@@ -48,6 +51,7 @@ const Topbar = () => {
   
     fetchUserRole();
   }, []);
+  
 
   const formatAddress = (addr) => {
     return addr ? `${addr.slice(0, 5)}...${addr.slice(-4)}` : '';
@@ -71,6 +75,10 @@ const Topbar = () => {
     } catch (error) {
       console.error("Logout Error:", error);
     }
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown); 
   };
 
   const handleMyProjects = () => {
@@ -124,20 +132,18 @@ const Topbar = () => {
       </div>
       <div className="react-icons">
         <FaBell size={30} className="react-icon" />
-
-        {/* Dropdown Menu for User */}
+        
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             <FaUserCircle size={30} className="react-icon" />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {/* Only show 'My Projects' if the user is not a mentor */}
-    {userRole !== 'mentor' && (
-      <Dropdown.Item onClick={() => navigate("/myprojects")}>
-        My Projects
-      </Dropdown.Item>
-    )}
+            {userRole !== 'mentor' && (
+              <Dropdown.Item onClick={() => navigate("/myprojects")}>
+                My Projects
+              </Dropdown.Item>
+            )}
             <Dropdown.Item onClick={() => setShowLogoutModal(true)}>Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

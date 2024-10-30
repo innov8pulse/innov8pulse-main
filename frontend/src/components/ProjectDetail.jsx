@@ -144,23 +144,7 @@ const ProjectDetail = ({ projectId }) => {
     )}
     {activeTab === 'Timeline' && (
   <div>
-    {/* <h2>Timeline</h2> */}
-    <Timeline isOwner={auth.currentUser && auth.currentUser.uid === project.userId} />
-    {/* <div className="timeline">
-      <div className="timeline-event">
-        <p>Created: {new Date(project.createdAt.seconds * 1000).toDateString()}</p>
-      </div>
-      <div className="timeline-event">
-        <p>Project Progress: {project.progress || "In Progress"}</p>
-      </div>
-      <div className="timeline-event">
-        {project.prizes && project.prizes.length > 0 ? (
-          <p>Prizes Won: {project.prizes.join(", ")}</p>
-        ) : (
-          <p>This project has not yet won any prizes.</p>
-        )}
-      </div>
-    </div> */}
+    <Timeline isOwner={auth.currentUser && auth.currentUser.uid === project.userId}  projectName={projectName} />
   </div>
 )}
 
@@ -190,16 +174,6 @@ const ProjectDetail = ({ projectId }) => {
 {activeTab === 'Prizes' && (
   <div>
     <Prizes project={project} currentUserId={currentUserId} />
-    {/* <h2>Prizes</h2>
-    {project.prizes && project.prizes.length > 0 ? (
-      <ul>
-        {project.prizes.map((prize, index) => (
-          <li key={index}>{prize}</li>
-        ))}
-      </ul>
-    ) : (
-      <p>This project has not yet won any prizes.</p>
-    )} */}
   </div>
 )}
 
@@ -227,19 +201,13 @@ const ProjectDetail = ({ projectId }) => {
 )}
 {activeTab === 'Updates' && (
   <div>
-    <Updates currentUserId={currentUserId} projectOwnerId={project.userId} />
-    {/* <h2>Updates</h2>
-    <ul>
-      <li>Update 1: New contributors have joined the project.</li>
-      <li>Update 2: The project has reached its first milestone.</li>
-      <li>Update 3: The project is preparing for the second round of reviews.</li>
-    </ul> */}
+    <Updates currentUserId={currentUserId} projectOwnerId={project.userId} projectName={projectName}  projectId={projectId} />
   </div>
 )}
 
     {activeTab === 'Participants' && (
       <div>
-         <Contributors />
+         {/* <Contributors /> */}
       </div>
     )}
   </div>

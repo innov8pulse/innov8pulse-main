@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 import { app } from '../../../firebaseConfig';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Timeline.css';
 
-const Timeline = ({ isOwner }) => { 
+const Timeline = ({ isOwner, projectName }) => { 
   const db = getFirestore(app); 
   const eventsCollectionRef = collection(db, 'events'); 
 
@@ -15,7 +15,8 @@ const Timeline = ({ isOwner }) => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const eventsSnapshot = await getDocs(eventsCollectionRef);
+      const q = query(eventsCollectionRef, where('projectName', '==', projectName));
+      const eventsSnapshot = await getDocs(q);
       const eventsData = eventsSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data()
@@ -23,7 +24,7 @@ const Timeline = ({ isOwner }) => {
       setEvents(eventsData);
     };
     fetchEvents();
-  }, []);
+  }, [projectName]);
 
   const handleEditToggle = () => setIsEditing(!isEditing);
 
@@ -37,12 +38,13 @@ const Timeline = ({ isOwner }) => {
       const formattedDate = newEvent.date.toLocaleString();
       const docRef = await addDoc(eventsCollectionRef, {
         title: newEvent.title,
-        date: formattedDate
+        date: formattedDate,
+        projectName, 
       });
 
       setEvents((prevEvents) => [
         ...prevEvents,
-        { id: docRef.id, title: newEvent.title, date: formattedDate }
+        { id: docRef.id, title: newEvent.title, date: formattedDate, projectName }
       ]);
 
       setNewEvent({ title: '', date: new Date() }); 

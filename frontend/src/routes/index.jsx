@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
   {
     path: "/addproject",
     element: (
-      <PrivateRoute>
+      <PrivateRoute allowedRole="participant">
         <AddProjects />
       </PrivateRoute>
     ),

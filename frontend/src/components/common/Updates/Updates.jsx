@@ -3,9 +3,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Updates.css';
 import { db } from '../../../firebaseConfig';
-import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, updateDoc, doc, query, where } from 'firebase/firestore';
 
-const Updates = ({ currentUserId, projectOwnerId, projectCreatedDate }) => {
+const Updates = ({ currentUserId, projectOwnerId, projectCreatedDate, projectName, userId }) => {
   const [updates, setUpdates] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
   const [newUpdate, setNewUpdate] = useState({ title: '', content: '', date: new Date() });
@@ -15,13 +15,15 @@ const Updates = ({ currentUserId, projectOwnerId, projectCreatedDate }) => {
 
   useEffect(() => {
     const fetchUpdates = async () => {
+      // Fetch updates only for this specific project using projectName
       const updatesCollection = collection(db, 'updates');
-      const updateSnapshot = await getDocs(updatesCollection);
+      const projectQuery = query(updatesCollection, where('projectName', '==', projectName));
+      const updateSnapshot = await getDocs(projectQuery);
       const updatesList = updateSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setUpdates(updatesList);
     };
     fetchUpdates();
-  }, []);
+  }, [projectName]);
 
   const handleAddToggle = () => setIsAdding(!isAdding);
 
@@ -41,6 +43,7 @@ const Updates = ({ currentUserId, projectOwnerId, projectCreatedDate }) => {
         content: newUpdate.content,
         date: newUpdate.date.toISOString(),
         current: false,
+        projectName, 
       };
       try {
         const docRef = await addDoc(collection(db, 'updates'), updateData);
@@ -52,7 +55,7 @@ const Updates = ({ currentUserId, projectOwnerId, projectCreatedDate }) => {
       }
     }
   };
-
+  
   const handleSetCurrentEvent = async (id) => {
     setCurrentEventId(id);
     const updatedUpdates = updates.map((update) =>
