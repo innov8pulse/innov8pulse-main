@@ -41,11 +41,11 @@ Innov8Pulse was designed to solve the problem of post-hackathon project abandonm
 Submit their projects for others to see.   
 Track contributions from team members or mentors.  
 Get valuable feedback and mentorship.  
-Safeguard their projects' value by utilizing blockchain technology.  
+Assign their projects' value by utilizing blockchain technology.  
 This project is open to contributions from developers interested in web development, blockchain technology, and mentorship systems. 
 
 ## Features
-User Authentication: Secure login/signup for participants and mentors using JWT.  
+User Authentication: Secure login/signup for participants and mentors.  
 Project Management: Users can create, update, and delete projects. Projects are displayed publicly for others to view.  
 Feedback System: Mentors can leave feedback on submitted projects.  
 Blockchain Integration: Projects are assigned value through blockchain tokens, ensuring transparency and ownership.  
@@ -58,18 +58,16 @@ Axios: For making HTTP requests to the backend.
 Redux or Context API: For state management.  
 Tailwind CSS: For styling components.  
 ### Backend:
-Node.js: JavaScript runtime for building the server.  
-Express.js: Web framework for handling API requests.  
-PostgreSQL: Relational database for storing user and project data.  
-JWT (JSON Web Token): For user authentication.  
+Firestore DB: Relational database for storing user and project data.  
+Firebase-auth: For user authentication.  
 ### Blockchain:
-Ethereum (or similar platform): Used for assigning project tokens and managing value transactions.  
+Starknet (or similar platform): Used for assigning project tokens and managing value transactions.  
 Smart Contracts: For handling the project value, proof of ownership, and transparency.  
 ### System Architecture
 ```
 +--------------------------+               +-------------------------+  
 |         Frontend          |               |        Blockchain        |  
-|      (React + Redux)      |               |       (Ethereum)         |  
+|      (React + Redux)      |               |       (Starknet)         |  
 +--------------------------+               +-------------------------+  
             |                                  |
             v                                  |
@@ -89,7 +87,7 @@ Smart Contracts: For handling the project value, proof of ownership, and transpa
 Before you begin, make sure you have the following tools installed:  
 
 Node.js (v14 or higher)  
-PostgreSQL (v12 or higher)  
+Firebase (v9 or higher)  
 Git  
 MetaMask or any other Ethereum wallet for blockchain integration  
 Installation  
@@ -97,7 +95,7 @@ Clone the repository:
   
 bash  
 Copy code  
-git clone https://github.com/yourusername/innov8pulse.git  
+git clone https://github.com/innov8pulse/innov8pulse.git  
 cd innov8pulse  
 Install dependencies for the backend:  
   
