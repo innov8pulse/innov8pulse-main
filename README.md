@@ -12,7 +12,9 @@ Innov8Pulse is a platform that allows hackathon participants to showcase their p
 
 
 
-### Table of Contents
+
+
+## Table of Contents
 Documentation  
 Project Overview 
 Features  
