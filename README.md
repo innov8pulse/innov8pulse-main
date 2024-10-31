@@ -3,9 +3,13 @@
 Innov8Pulse is a platform that allows hackathon participants to showcase their projects, track contributions, and receive feedback and mentorship from industry experts. By integrating blockchain, the platform also provides a way to assign value to projects through tokens, ensuring accountability and ownership over innovative ideas.
 
 ## Contributors
+
 | Name               | Socials                                                                                                                                                                                                                                                                      |
 |--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Stephen Mwangi** | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/stephenmwangi) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/stephenmwangi) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white)](https://twitter.com/stephenmwangi) |
+| **Huldah Kaura** | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/stephenmwangi) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/stephenmwangi) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white)](https://twitter.com/stephenmwangi) |
+| **Muiga Steve**  | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/emuiga) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/stevemuiga) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white)](https://twitter.com/)   |
+
+
 
 
 ### Table of Contents
