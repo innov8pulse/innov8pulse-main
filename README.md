@@ -1,14 +1,12 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 # innov8pulse-main
 
 Innov8Pulse is a platform that allows hackathon participants to showcase their projects, track contributions, and receive feedback and mentorship from industry experts. By integrating blockchain, the platform also provides a way to assign value to projects through tokens, ensuring accountability and ownership over innovative ideas.
+
+## Contributors
+| Name               | Socials                                                                                                                                                                                                                                                                      |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Stephen Mwangi** | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/stephenmwangi) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/stephenmwangi) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&logoColor=white)](https://twitter.com/stephenmwangi) |
+
 
 ### Table of Contents
 Documentation  
