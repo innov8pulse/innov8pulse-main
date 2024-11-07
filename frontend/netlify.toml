@@ -1,0 +1,10 @@
+[build]
+  base = "frontend"           # Define the subdirectory where your frontend code resides
+  command = "npm run build"   # Or use "yarn build" if you're using Yarn
+  publish = "frontend/build"  # Directory where your build files are located
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
