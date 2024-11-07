@@ -4,15 +4,14 @@ import { postUserData } from "../api/FirestoreAPI";
 import LogoBlack from "../assets/logo-black.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Loader from "../components/common/Loader"; 
-
+import Loader from "../components/common/Loader";
 export default function RegisterComponent() {
     let navigate = useNavigate();
     const [credentails, setCredentials] = useState({ name: "", email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [role, setRole] = useState("");
     const [errorMessages, setErrorMessages] = useState({ name: "", email: "", password: "", role: "" });
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
 
     const validateInputs = () => {
         let errors = { name: "", email: "", password: "", role: "" };
@@ -36,30 +35,37 @@ export default function RegisterComponent() {
         }
 
         setErrorMessages(errors);
-        return isValid; 
+        return isValid;
     };
 
     const register = async () => {
         if (!validateInputs()) {
             return;
         }
-    
-        setLoading(true); 
-    
+
+        setLoading(true);
+
+        // if (role === "mentor") {
+        //     // Redirect mentors to the MentorForm instead of registering them immediately
+        //     navigate("/mentor-form"); // Update this to redirect to the mentor form route
+        //     setLoading(false);
+        //     return;
+        // }
+
         try {
             const userCredential = await RegisterAPI(credentails.email, credentails.password);
             const user = userCredential.user;
-    
+
             if (user && user.email) {
                 toast.success("Account created!");
-    
+
                 const userData = {
                     name: credentails.name,
                     email: credentails.email,
                     role: role,
                     imageLink: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90byWYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
                 };
-    
+
                 await postUserData(userData);
                 localStorage.setItem("userEmail", user.email);
                 setCredentials({ name: "", email: "", password: "" });
@@ -81,21 +87,19 @@ export default function RegisterComponent() {
                     toast.error("Password is too weak. Please choose a stronger password.");
                     break;
                 default:
-                    console.error(err); 
-                    // toast.error("Check email and password credentials and try again."); 
+                    console.error(err);
             }
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
-    
-    
+
     return (
         <div className="login-wrapper">
             <img src={LogoBlack} className="innov8Logo" onClick={() => navigate("/")}/>
 
-            {loading ? ( 
-                <Loader /> 
+            {loading ? (
+                <Loader />
             ) : (
                 <div className="login-wrapper-inner">
                     <h1 className="heading">ignite ideas</h1>
@@ -108,7 +112,7 @@ export default function RegisterComponent() {
                             className="common-input"
                             placeholder="your name"
                         />
-                        {errorMessages.name && <p className="error-label">{errorMessages.name}</p>} {/* Error label for name */}
+                        {errorMessages.name && <p className="error-label">{errorMessages.name}</p>}
 
                         <input
                             onChange={(event) => setCredentials({ ...credentails, email: event.target.value })}
@@ -117,17 +121,17 @@ export default function RegisterComponent() {
                             className="common-input"
                             placeholder="email or phone number"
                         />
-                        {errorMessages.email && <p className="error-label">{errorMessages.email}</p>} {/* Error label for email */}
+                        {errorMessages.email && <p className="error-label">{errorMessages.email}</p>}
 
-                        <div className="password-container"> 
+                        <div className="password-container">
                             <input
                                 onChange={(event) => setCredentials({ ...credentails, password: event.target.value })}
                                 value={credentails.password}
-                                type={showPassword ? "text" : "password"} 
+                                type={showPassword ? "text" : "password"}
                                 className="common-input"
                                 placeholder="password (6 or more characters)"
                             />
-                            {errorMessages.password && <p className="error-label">{errorMessages.password}</p>} {/* Error label for password */}
+                            {errorMessages.password && <p className="error-label">{errorMessages.password}</p>}
                             <label className="password-toggle">
                                 <input
                                     type="checkbox"
@@ -138,7 +142,6 @@ export default function RegisterComponent() {
                         </div>
                     </div>
 
-                    {/* Role Selection */}
                     <div className="role-selection">
                         <label>
                             <input
@@ -158,7 +161,7 @@ export default function RegisterComponent() {
                             />
                             Mentor
                         </label>
-                        {errorMessages.role && <p className="error-label">{errorMessages.role}</p>} {/* Error label for role selection */}
+                        {errorMessages.role && <p className="error-label">{errorMessages.role}</p>}
                     </div>
 
                     <button onClick={register} className="login-btn">

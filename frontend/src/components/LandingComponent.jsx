@@ -82,7 +82,7 @@ export default function LandingComponent() {
               <div className="button-container" style={{ textAlign: 'center', marginTop: '20px' }}>
       <Button text="join us" onClick={handleJoinInnovationClick} />
       <Button
-        text="explore projects"
+        text="explore"
         onClick={handleExploreProjectsClick}
         variant="alt" 
       />

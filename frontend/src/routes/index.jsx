@@ -8,7 +8,6 @@ import Projects from "../components/common/Projects";
 import MyProjects from "../Pages/MyProjects";
 import PrivateRoute from "./privateroute"; 
 import ProjectDetail from "../components/ProjectDetail";
-// import RoleProtectedRoute from '../auth/RoleProvider';
 
 export const router = createBrowserRouter([
   {

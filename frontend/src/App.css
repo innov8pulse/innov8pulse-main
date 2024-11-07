@@ -502,3 +502,35 @@ p {
   }
 
 }
+
+@media (max-width: 1366px) {
+  h1 {
+    font-size: 50px; 
+  }
+
+  .dynamic-list {
+    font-size: 1rem; 
+  }
+
+  .Left-Content {
+  /* font-size: 12px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  align-content: flex-start;
+  align-items: flex-start;
+  background-color: #17202a;
+  display: flex;
+  flex: 1 0 0px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: 100%;
+  justify-content: center; */
+  max-width: 400px;
+  /* overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 1px; */
+}
+
+}

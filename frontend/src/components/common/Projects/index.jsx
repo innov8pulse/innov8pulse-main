@@ -65,10 +65,10 @@ const MainProjectsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProjects, setFilteredProjects] = useState([]);
   const { address } = useAccount();
-  const { pageNumber } = useParams(); // Get the page number from the URL
-  const navigate = useNavigate(); // Hook for programmatic navigation
-  const [currentPage, setCurrentPage] = useState(parseInt(pageNumber) || 1); // Initialize with URL param
-  const projectsPerPage = 9; // Number of projects per page
+  const { pageNumber } = useParams(); 
+  const navigate = useNavigate(); 
+  const [currentPage, setCurrentPage] = useState(parseInt(pageNumber) || 1); 
+  const projectsPerPage = 9; 
 
   useEffect(() => {
     const db = getFirestore(app);
@@ -95,7 +95,7 @@ const MainProjectsPage = () => {
     });
 
     setFilteredProjects(filtered);
-    setCurrentPage(1); // Reset to page 1 on search
+    setCurrentPage(1); 
   }, [searchTerm, projects]);
 
   const addProject = (newProject) => {
@@ -103,22 +103,20 @@ const MainProjectsPage = () => {
     setFilteredProjects((prevFiltered) => [...prevFiltered, newProject]); 
   };
 
-  // Get current projects based on pagination
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
 
-  // Pagination change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    navigate(`/projects/page/${pageNumber}`); // Update the URL with the new page
+    navigate(`/projects/page/${pageNumber}`); 
   };
 
   useEffect(() => {
     if (pageNumber) {
-      setCurrentPage(parseInt(pageNumber)); // Update the current page when the URL changes
+      setCurrentPage(parseInt(pageNumber));
     }
   }, [pageNumber]);
 
@@ -129,7 +127,7 @@ const MainProjectsPage = () => {
       <Topbar />
       <div>
         <SearchProject searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        {address && <AddProjectCard addProject={addProject} />} {/* Pass addProject as prop */}      
+        {address && <AddProjectCard addProject={addProject} />}     
 
         <div className="project-list">
           {currentProjects.length > 0 ? (
@@ -138,7 +136,7 @@ const MainProjectsPage = () => {
                 <div className="taikai-card">
                   <div className="project-image">
                     <img
-                      src={project.image || "https://via.placeholder.com/300"} // Display uploaded image
+                      src={project.image || "https://via.placeholder.com/300"} 
                       alt={project.projectName}
                     />
                     <span

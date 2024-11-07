@@ -21,7 +21,6 @@ export const RegisterAPI = async (email, password, name = "Anonymous", role = "p
       uid: response.user.uid
     }, { merge: true });
     return response;
-    console.log(email, password, name, role); // Log values before using them
 
   } catch (err) {
 

@@ -224,3 +224,25 @@ export const getConnections = (userId, targetId, setIsConnected) => {
     console.log(err);
   }
 };
+
+export const finalizeMentorRegistration = async (mentorId) => {
+  const mentorRef = db.collection("pendingMentors").doc(mentorId);
+  const mentorSnapshot = await mentorRef.get();
+
+  if (!mentorSnapshot.exists) {
+      throw new Error("Mentor not found.");
+  }
+
+  const mentorData = mentorSnapshot.data();
+
+  // Check if mentor is already approved
+  if (mentorData.approved) {
+      throw new Error("Mentor is already approved.");
+  }
+
+  // Update mentor's approved status
+  await mentorRef.update({ approved: true });
+
+  // Optionally, you can return the mentor data
+  return mentorData;
+};

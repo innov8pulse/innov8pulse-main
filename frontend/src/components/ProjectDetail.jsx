@@ -10,7 +10,6 @@ import './ProjectDetail.css';
 import Timeline from './common/Timeline/Timeline';
 import Updates from './common/Updates/Updates';
 import Footer from './common/Footer/Footer';
-import Contributors from './common/Contributors/Contributors';
 import Prizes from './common/Prizes/Prizes';
 
 const ProjectDetail = ({ projectId }) => {
@@ -217,11 +216,11 @@ const ProjectDetail = ({ projectId }) => {
       
 
       <div className="event-info">
-        <h3>Event Dates</h3>
-        <p>
+        {/* <h3>Event Dates</h3> */}
+        {/* <p>
           Start Date: {project.startDate || ""}<br />
           End Date: {project.endDate || ""}
-        </p>
+        </p> */}
         <p>
           The {project.projectName} project was registered on the platform on {new Date(project.createdAt.seconds * 1000).toDateString()}.
           
