@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-// import App from './App.jsx'
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider, BrowserRouter } from "react-router-dom";
 import Landing  from "./Pages/Landing.jsx";
 import Login  from "./Pages/Login.jsx";
 import { router } from './routes/index.jsx';
@@ -16,6 +15,7 @@ import StarknetProvider from './provider/starknet-provider.tsx'; // Correct impo
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <BrowserRouter>
     <StarknetProvider>
     <AuthProvider>
     
@@ -24,5 +24,6 @@ createRoot(document.getElementById('root')).render(
     </ AuthProvider>
     </StarknetProvider>
     <ToastContainer />
+    </BrowserRouter>
   </StrictMode>,
 )
