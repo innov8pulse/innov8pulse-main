@@ -4,10 +4,10 @@ import { app } from '../../../firebaseConfig';
 import SearchProject from "../SearchProject";
 import AddProjectCard from "../AddProjectCard";
 import "../Projects/index.css";
-import { useAccount } from '@starknet-react/core'; 
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Topbar from "../Topbar";
 import Footer from "../Footer/Footer";
+import { auth } from '../../../firebaseConfig';
 
 // Pagination Component
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
@@ -64,11 +64,20 @@ const MainProjectsPage = () => {
   const [projects, setProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProjects, setFilteredProjects] = useState([]);
-  const { address } = useAccount();
   const { pageNumber } = useParams(); 
   const navigate = useNavigate(); 
   const [currentPage, setCurrentPage] = useState(parseInt(pageNumber) || 1); 
   const projectsPerPage = 9; 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Check authentication
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsAuthenticated(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const db = getFirestore(app);
@@ -127,7 +136,7 @@ const MainProjectsPage = () => {
       <Topbar />
       <div>
         <SearchProject searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        {address && <AddProjectCard addProject={addProject} />}     
+        {isAuthenticated && <AddProjectCard />}     
 
         <div className="project-list">
           {currentProjects.length > 0 ? (

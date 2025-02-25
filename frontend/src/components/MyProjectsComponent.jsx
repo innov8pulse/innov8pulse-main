@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { auth } from '../firebaseConfig';
 import { Link } from 'react-router-dom';
-import "../components/common/AddProjectCard/index.css"; 
-import AddProjectCard from "../components/AddProjectsComponent";
+import "./common/AddProjectCard/index.css";
+import AddProjectCard from "./common/AddProjectCard";
 import Topbar from './common/Topbar';
-import Loader  from "../components/common/Loader";
+import Loader from "./common/Loader";
 import SearchProject from './common/SearchProject';
-import Footer  from "../components/common/Footer/Footer";
+import Footer from "./common/Footer/Footer";
+
 const MyProjectsComponent = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredProjects, setFilteredProjects] = useState([]);
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -25,6 +28,7 @@ const MyProjectsComponent = () => {
                 const querySnapshot = await getDocs(q);
                 const userProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 setProjects(userProjects);
+                setFilteredProjects(userProjects);
             } catch (err) {
                 setError("Failed to load projects.");
                 console.error(err);
@@ -36,19 +40,37 @@ const MyProjectsComponent = () => {
         fetchProjects();
     }, []);
 
+    // Add search filtering
+    useEffect(() => {
+        if (searchTerm) {
+            const filtered = projects.filter(project => 
+                project.projectName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                project.projectDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (project.tags && project.tags.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            setFilteredProjects(filtered);
+        } else {
+            setFilteredProjects(projects);
+        }
+    }, [searchTerm, projects]);
+
     if (loading) return <Loader />;
     if (error) return <div>{error}</div>;
 
     return (
         <div>
-                <Topbar />
-
-            <SearchProject/>
+            <Topbar />
+            <SearchProject 
+                searchTerm={searchTerm} 
+                setSearchTerm={setSearchTerm} 
+            />
             <div className="project-list">
-                {projects.length === 0 ? (
-                    <p style={{ color: '#17202a' }}>Create your first project!🎉</p>
+                {filteredProjects.length === 0 ? (
+                    <p style={{ color: '#17202a' }}>
+                        {searchTerm ? "No matching projects found" : "Create your first project!🎉"}
+                    </p>
                 ) : (
-                    projects.map(project => (
+                    filteredProjects.map(project => (
                         <Link to={`/projects/${encodeURIComponent(project.projectName)}`} key={project.id}>
                             <div className="taikai-card">
                                 <div className="project-image">
@@ -93,17 +115,12 @@ const MyProjectsComponent = () => {
                         </Link>
                     ))
                 )}
-
-                
-            <div>
-                 <AddProjectCard />
-            </div>
             </div>
             <div>
+                <AddProjectCard />
+            </div>
             <Footer />
-            </div>
         </div>
-        
     );
 };
 

@@ -4,9 +4,8 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import HomeLayout from "../layouts/HomeLayout";
 import AddProjects from "../Pages/AddProjects";
-import Projects from "../components/common/Projects";
+import MainProjectsPage from "../components/common/Projects/index";
 import MyProjects from "../Pages/MyProjects";
-import PrivateRoute from "./privateroute"; 
 import ProjectDetail from "../components/ProjectDetail";
 
 export const router = createBrowserRouter([
@@ -24,50 +23,26 @@ export const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: (
-      <PrivateRoute>
-        <HomeLayout />
-      </PrivateRoute>
-    ),
+    element: <HomeLayout />,
   },
   {
     path: "/addproject",
-    element: (
-      <PrivateRoute allowedRole="participant">
-        <AddProjects />
-      </PrivateRoute>
-    ),
+    element: <AddProjects />,
   },
   {
     path: "/projects",
-    element: (
-      <PrivateRoute>
-        <Projects />
-      </PrivateRoute>
-    ),
+    element: <MainProjectsPage />,
   },
   {
     path: "/projects/page/:pageNumber",  
-    element: (
-      <PrivateRoute>
-        <Projects />
-      </PrivateRoute>
-    ),
+    element: <MainProjectsPage />,
   },
   {
     path: "/myprojects",
-    element: (
-      <PrivateRoute allowedRole='participant'>
-        <MyProjects />
-      </PrivateRoute>
-    ),
+    element: <MyProjects />,
   },
   {
     path: "/projects/:projectName",
-    element: (
-      <PrivateRoute>
-        <ProjectDetail />
-      </PrivateRoute>
-    ),
+    element: <ProjectDetail />,
   },
 ]);
