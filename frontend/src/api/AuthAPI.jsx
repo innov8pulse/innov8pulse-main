@@ -33,19 +33,26 @@ export const RegisterAPI = async (email, password, name = "Anonymous", role = "p
 // Refactored LoginAPI to fetch user role after login
 export const LoginAPI = async (email, password) => {
   try {
-    let response = await signInWithEmailAndPassword(auth, email, password);
+    const response = await signInWithEmailAndPassword(auth, email, password);
     const user = response.user;
 
     // Fetch the user's role from Firestore
     const userDoc = await getDoc(doc(db, 'users', user.uid));
     if (userDoc.exists()) {
       const userData = userDoc.data();
-      return { ...response, role: userData.role }; // Return login response with the user role
+      return { 
+        success: true,
+        user: response.user,
+        role: userData.role 
+      };
     } else {
       throw new Error("User data not found in Firestore.");
     }
   } catch (err) {
-    return err;
+    return {
+      success: false,
+      error: err.message
+    };
   }
 };
 

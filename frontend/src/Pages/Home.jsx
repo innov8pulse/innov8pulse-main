@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MainProjectsPage from "../components/common/Projects"; 
+import MainProjectsPage from "../components/common/Projects/index"; 
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
